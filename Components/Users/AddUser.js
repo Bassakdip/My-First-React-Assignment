@@ -7,14 +7,15 @@ import classes from './AddUser.module.css';
 const AddUser = (props) => {
     const [enteredUsername, setEnteredUsername] = useState('');
     const [enteredAge, setEnteredAge] = useState('');
+    const [enteredCollageName, setEnteredCollageName] = useState('');
     const [error, setError] = useState('');
 
     const AddUserHandler = (event) => {
         event.preventDefault();
-        if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+        if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0 || enteredCollageName.trim().length === 0) {
             setError({
                 title: 'Invalid input',
-                message: 'Please enter a valid name and age (non-empty values).'
+                message: 'Please enter a valid name and age and collage name (non-empty values).'
             })
             return;
         }
@@ -28,6 +29,7 @@ const AddUser = (props) => {
         props.onAddUser(enteredUsername, enteredAge);
         setEnteredUsername('');
         setEnteredAge('');
+        setEnteredCollageName('');
     }
 
     const usernameChangeHandler = (event) => {
@@ -35,6 +37,9 @@ const AddUser = (props) => {
     };
     const ageChangeHandler = (event) => {
         setEnteredAge(event.target.value);
+    };
+    const collageNameChangeHandler = (event) => {
+        setEnteredCollageName(event.target.value);
     };
 
     const errorHandler = () => {
@@ -57,6 +62,9 @@ const AddUser = (props) => {
 
                     <label htmlFor="age">Age(Years):-</label>
                     <input type="number" id="age" value={enteredAge} onChange={ageChangeHandler} />
+
+                    <label htmlFor="clg">Collage Name:-</label>
+                    <input type="text" id="clg" value={enteredCollageName} onChange={collageNameChangeHandler} />
 
                     <Button type="submit">Submit</Button>
                 </form>
